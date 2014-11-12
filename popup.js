@@ -44,7 +44,7 @@ function update() {
   localStorage.removeItem('task' + tasks.length);
 }
 
-/* Notification 
+/* Notification
 	Reference: http://code.google.com/chrome/extensions/dev/browserAction.html#method-setBadgeText
  */
 function notify() {
@@ -59,13 +59,13 @@ $(document).ready(function() {
       if($.cookie("css")) {
          $("link").attr("href",$.cookie("css"));
       }
-   
-      $("#nav a").click(function() { 
+
+      $("#nav a").click(function() {
          $("link").attr("href",$(this).attr('rel'));
          $.cookie("css",$(this).attr('rel'), {expires: 365, path: '/'});
          return false;
       });
-  
+
 
 
 
@@ -83,10 +83,10 @@ $(document).ready(function() {
   }
   $('#add-task').keyup(function(e) {
     if (e.keyCode == 13) add();
-    
+
   });
   $('#add-task').focus();
-  
+
   $('.check').live('click', function(e) {
     this.parentNode.className = 'removing';
     remove(this.parentNode);
@@ -104,22 +104,33 @@ $(document).ready(function() {
   });
 
 
-   function colorize( str ) {
-      return '<span class="hashsymbol">' + str.substring(0, 1) + '<\/span>' + '<span class="label">' + str.substring(1, str.length) + '<\/span> ';
-    };
-    $('body').find(':not(textarea):not(span.label):not(span.neo)')
-      .replaceText(/#\S+/g, colorize );
+ll = document.getElementById("tasks");
+
+
+
+
 });
 
-/*
-// replace hashtags
-$(function(){
-  $(document).ready(function(){
-    function colorize( str ) {
-      return '<span class="label">' + str.substring(1, str.length) + '<\/span>';
-    };
-    $('body').find(':not(textarea):not(span.label)')
-      .replaceText(/#\S+/g, colorize );
-  });
+
+// to communicate with content.js
+
+setTimeout(function(){
+
+ll = document.getElementById("tasks");
+console.log(ll);
+
+
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+   if (changeInfo.status == 'complete') {
+      chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+         chrome.tabs.sendMessage(tabs[0].id, {location: ll}, function(response) {});
+      });
+   }
 });
-*/
+
+
+
+
+
+}, 3000);
+
