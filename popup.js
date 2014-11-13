@@ -1,4 +1,4 @@
-function add() {
+/* function add() {
   var value = $('#add-task').val();
   if (value) {
     var key = 'task' + localStorage.length;
@@ -42,11 +42,11 @@ function update() {
     tasks[i].id = key;
   }
   localStorage.removeItem('task' + tasks.length);
-}
+}*/
 
 /* Notification
 	Reference: http://code.google.com/chrome/extensions/dev/browserAction.html#method-setBadgeText
- */
+ *//*
 function notify() {
   chrome.browserAction.setBadgeText({
     text: localStorage.length ? localStorage.length + '' : '' // does length exist, if yes display length; else display nothing
@@ -128,9 +128,16 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
    }
 });
 
-
-
-
-
-}, 3000);
+}, 3000); */
+//Getting the elements and storing them into trnds array
+$(document).ready(function() {
+    k=$(".trend-item.js-trend-item").length;
+    console.log(k);
+    for(j=0; j<=k; j++){
+      var pars = $("li, trend-item.js-trend-item").text();
+      var trnds=[k];
+      trnds.push(pars.toString());
+           console.log(trnds[j]);
+      }
+      });
 
