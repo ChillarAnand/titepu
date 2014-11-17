@@ -18,7 +18,7 @@ chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) {
 
 $(".trends-inner").children().filter("div,.flex-module.trend-container").children().filter("div,.flex-module-inner").children().filter("ul,.trend-items.js-trends").children().
             each(function(){
-        var x=$(this).attr("data-trend-name");
+        var x=$("this").attr("data-trend-name");
         var y=[];
         y.push(x);
         console.log(y);
